@@ -1,0 +1,48 @@
+PARSING BUCK FILES: FINISHED IN 1.1s
+CREATING ACTION GRAPH: FINISHED IN 0.1s
+src/canvas.cpp:25:3: error: use of undeclared identifier 'path'
+  path = bmp_path + fileName;
+  ^
+src/canvas.cpp:32:35: error: type 'CanvasPixel' does not provide a subscript operator
+      CanvasPixel pixel = _data[x][y];
+                          ~~~~~~~~^~
+src/canvas.cpp:33:34: error: no member named 'r' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                           ~~~~~ ^
+src/canvas.cpp:33:43: error: no member named 'g' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                                    ~~~~~ ^
+src/canvas.cpp:33:52: error: no member named 'b' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                                             ~~~~~ ^
+5 errors generated.
+DOWNLOADED 0 ARTIFACTS, 0.00 BYTES, 100.0% CACHE MISS
+BUILDING: FINISHED IN 5.8s 10/9 JOBS, 3 UPDATED
+
+Top slow rules
+    //:cg: 4.7s
+    //lib/libbmp:libbmp: 0.0s
+    //lib/boost_1_78_0:boost: 0.0s
+BUILD FAILED
+Command failed with exit code 1.
+
+command: [/usr/bin/clang++, @/Users/barjimal/Code/cpp/cg/buck-out/bin/cg#compile-canvas.cpp.o90b2484d,default/ppandcompile.argsfile]
+
+stderr: src/canvas.cpp:25:3: error: use of undeclared identifier 'path'
+  path = bmp_path + fileName;
+  ^
+src/canvas.cpp:32:35: error: type 'CanvasPixel' does not provide a subscript operator
+      CanvasPixel pixel = _data[x][y];
+                          ~~~~~~~~^~
+src/canvas.cpp:33:34: error: no member named 'r' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                           ~~~~~ ^
+src/canvas.cpp:33:43: error: no member named 'g' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                                    ~~~~~ ^
+src/canvas.cpp:33:52: error: no member named 'b' in 'CanvasPixel'
+      img.set_pixel (x, y, pixel.r, pixel.g, pixel.b);
+                                             ~~~~~ ^
+5 errors generated.
+    When running <c++ preprocess_and_compile>.
+    When building rule //:cg#compile-canvas.cpp.o90b2484d,default.

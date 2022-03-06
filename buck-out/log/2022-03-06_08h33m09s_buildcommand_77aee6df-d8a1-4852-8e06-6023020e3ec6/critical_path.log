@@ -1,0 +1,2 @@
+//:cg#compile-canvas.cpp.o90b2484d,default: {"totalElapsedTimeMs":4110,"type":"cxx_preprocess_and_compile","executionTimeInfo":{"executionDurationMs":4110,"eventNanoTime":252338105949668}}
+//:cg#binary: {"totalElapsedTimeMs":4189,"type":"cxx_link","executionTimeInfo":{"executionDurationMs":79,"eventNanoTime":252338204517237}}

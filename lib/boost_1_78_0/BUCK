@@ -1,0 +1,13 @@
+cxx_library(
+    name = "boost",
+		raw_headers = [
+				"boost/geometry/geometry.hpp",
+		],
+    public_include_directories = [
+        ".",
+    ],
+    visibility = [
+    		"PUBLIC",
+    ],
+)
+
