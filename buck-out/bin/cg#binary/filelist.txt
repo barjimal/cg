@@ -1,3 +1,0 @@
-buck-out/gen/cg#compile-canvas.cpp.o90b2484d,default/src/canvas.cpp.o
-buck-out/gen/cg#compile-main.cpp.o4b91d1f7,default/src/main.cpp.o
-buck-out/gen/lib/libbmp/libbmp#default,static/liblibbmp.a

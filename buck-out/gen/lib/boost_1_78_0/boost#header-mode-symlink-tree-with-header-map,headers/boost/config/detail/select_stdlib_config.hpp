@@ -1,1 +1,0 @@
-/Users/barjimal/Code/cpp/cg/lib/boost_1_78_0/boost/config/detail/select_stdlib_config.hpp
