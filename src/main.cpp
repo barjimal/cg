@@ -206,6 +206,11 @@ int main ()
     }
   }
   canvas.SaveToBitmap();
+
+  sceneObjects = {};
+  delete sphere1;
+  delete sphere2;
+  delete sphere3;
   
   // testCanvas();
   return 0;
