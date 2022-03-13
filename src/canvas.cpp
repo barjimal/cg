@@ -1,6 +1,7 @@
 #include "canvas.hpp"
 
 #include <iostream>
+#include <cmath>
 
 #include <bmp/libbmp.h>
 
@@ -11,12 +12,14 @@ const std::string bmp_path = "bmp-out/";
 
 long long int Canvas::GetIndex(const cp_int& x, const cp_int& y)
 {
-  return (_size_x * y) + x;
+  return (_width * y) + x;
 }
 
-Canvas::Canvas(const cp_int& size_x, const cp_int& size_y) : _size_x(size_x), _size_y(size_y)
+Canvas::Canvas(const cp_int& width, const cp_int& height) : _width(width), _height(height)
 {
-  _data = new CanvasPixel[size_x * size_y];
+  _data = new CanvasPixel[width * _height];
+  _origin_x = - cp_int(std::floor(_width / 2.0));
+  _origin_y = cp_int(std::floor(_height / 2.0));
 }
 
 Canvas::~Canvas()
@@ -28,16 +31,16 @@ void Canvas::SaveToBitmap(std::string fileName)
 {
   std::string path = bmp_path + fileName;
 
-  BmpImg img (_size_x, _size_y);
-  for (int y = _size_y - 1, x; y >= 0; y--)
+  BmpImg img (_width, _height);
+  for (int y = _height - 1, x; y >= 0; y--)
   {
-    for (x = _size_x - 1; x >= 0; x--)
+    for (x = _width - 1; x >= 0; x--)
     {
       CanvasPixel pixel = _data[GetIndex(x,y)];
       img.set_pixel (x, y, pixel._r, pixel._g, pixel._b);
     }
   }
-  
+
   img.write (path);
   std::cout << path << std::endl;
 }
@@ -48,9 +51,25 @@ void Canvas::SetPixelColor(
   const int& r,
   const int& g,
   const int& b) {
-  (_data[GetIndex(x, y)])._r = r;
-  (_data[GetIndex(x, y)])._g = g;
-  (_data[GetIndex(x, y)])._b = b;
+
+  cp_int _x = x - _origin_x;
+  cp_int _y = _origin_y - y;
+  if (_x < 0 || _x >= _width) return;
+  if (_y < 0 || _y >= _height) return;
+
+  (_data[GetIndex(_x, _y)])._r = r;
+  (_data[GetIndex(_x, _y)])._g = g;
+  (_data[GetIndex(_x, _y)])._b = b;
+}
+
+cp_int Canvas::GetWidth()
+{
+  return _width;
+}
+
+cp_int Canvas::GetHeight()
+{
+  return _height;
 }
 
 } // namespace cg

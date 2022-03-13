@@ -3,10 +3,10 @@ cxx_binary(
     name = "cg",
     srcs = [
         "src/main.cpp",
-				"src/canvas.cpp",
+		    "src/canvas.cpp",
     ],
-		headers = [
-  			"src/canvas.hpp",
+	headers = [
+  		  "src/canvas.hpp",
     ],
     deps = [
         "//lib/libbmp:libbmp",

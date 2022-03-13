@@ -24,12 +24,14 @@ struct CanvasPixel
 class Canvas
 {
 private:
-    CanvasPixel * _data;
-public:
-  const cp_int _size_x;
-  const cp_int _size_y;
+  CanvasPixel * _data;
+  cp_int _origin_x;
+  cp_int _origin_y;
+  const cp_int _width;
+  const cp_int _height;
 
-  Canvas(const cp_int& size_x = 1280 , const cp_int& size_y = 720); 
+public:
+  Canvas(const cp_int& width = 1920, const cp_int& height = 1080); 
   ~Canvas();
   void SaveToBitmap(std::string fileName = "test.bmp");
   void SetPixelColor(
@@ -39,6 +41,8 @@ public:
     const int& g = 0,
     const int& b = 0);
   long long int GetIndex(const cp_int& x, const cp_int& y);
+  cp_int GetWidth();
+  cp_int GetHeight();
  };
 
 } // namespace cg
