@@ -72,4 +72,15 @@ cp_int Canvas::GetHeight()
   return _height;
 }
 
+point3_t CanvasToViewPort(Canvas& canvas, Viewport& viewport, int x, int y)
+{
+  double Cw = canvas.GetWidth();
+  double Ch = canvas.GetHeight();
+  double Vw = viewport.GetWidth();
+  double Vh = viewport.GetHeight();
+  double d = viewport.GetDistance();
+  return point3_t(x*Vw/Cw, y*Vh/Ch, d);
+}
+
+
 } // namespace cg

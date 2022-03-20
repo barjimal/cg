@@ -4,11 +4,11 @@
 
 #include <string>
 
+#include "common.hpp"
+#include "viewport.hpp"
+
 namespace cg
 {
-
-typedef long long int cp_int;
-
 struct CanvasPixel
 {
   int _r;
@@ -27,8 +27,8 @@ private:
   CanvasPixel * _data;
   cp_int _origin_x;
   cp_int _origin_y;
-  const cp_int _width;
-  const cp_int _height;
+  cp_int _width;
+  cp_int _height;
 
 public:
   Canvas(const cp_int& width = 1920, const cp_int& height = 1080); 
@@ -44,6 +44,8 @@ public:
   cp_int GetWidth();
   cp_int GetHeight();
  };
+
+point3_t CanvasToViewPort(Canvas& canvas, Viewport& viewport, int x, int y);
 
 } // namespace cg
 
