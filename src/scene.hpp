@@ -17,9 +17,10 @@ class Scene
 {
 public:
   Canvas canvas;
-  Viewport viewport();
+  Viewport viewport;
   TraceRayContext context;
   std::vector<SceneObject *> sceneObjects;
+  std::vector<SceneLight *>sceneLights;
 
   Scene();
   ~Scene();

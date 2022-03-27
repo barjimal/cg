@@ -1,67 +1,56 @@
-#include <cmath>
 #include <iostream>
-#include <limits>
-#include <string>
-#include <vector>
 
-#include <boost/geometry.hpp>
-
-#include "canvas.hpp"
-#include "color.hpp"
-#include "common.hpp"
-#include "scene_object.hpp"
-#include "sphere.hpp"
-#include "trace_ray.hpp"
-#include "viewport.hpp"
+#include "scene.hpp"
 
 int main ()
 {
   using namespace cg;
-  namespace bg = boost::geometry;
 
   Sphere * sphere1 = new Sphere(
     1,
     point3_t(0.0, -1.0, 3.0),
-    Color(255, 0, 0)
+    Color(255, 0, 0),
+    500,
+    0.2
   );
   Sphere * sphere2 = new Sphere(
     1,
     point3_t(2.0, 0.0, 4.0),
-    Color(0, 0, 255)
+    Color(0, 0, 255),
+    500,
+    0.3
   );
   Sphere * sphere3 = new Sphere(
     1,
     point3_t(-2.0, 0.0, 4.0),
-    Color(0, 255, 0)
+    Color(0, 255, 0),
+    100,
+    0.4
+  );
+  Sphere * sphere4 = new Sphere(
+    5000,
+    point3_t(0.0, -5001.0, 0.0),
+    Color(255, 255, 0),
+    1000,
+    0.5
   );
 
-  Canvas canvas (1200, 1200);
-  Viewport viewport;
-  double Cw = canvas.GetWidth();
-  double Ch = canvas.GetHeight();
+  AmbientLight * ambientLight = new AmbientLight(
+    0.2
+  );
+  PointLight * pointLight = new PointLight(
+    0.6,
+    point3_t(2, 1, 0)
+  );
+  DirectionalLight * directionalLight = new DirectionalLight(
+    0.2,
+    point3_t(1, 4, 4)
+  );
 
-  std::vector<SceneObject *>sceneObjects = {sphere1, sphere2, sphere3};
+  Scene scene;
+  scene.sceneObjects = {sphere1, sphere2, sphere3, sphere4};
+  scene.sceneLights = {ambientLight, pointLight, directionalLight};
+  scene.RenderScene();
 
-  point3_t O(0, 0, 0);
-  for (int x = -(int)Cw/2; x < (int)Cw/2; x++){
-    for (int y = -(int)Ch/2; y < (int)Ch/2; y++){
-      point3_t D = CanvasToViewPort(canvas, viewport, x, y);
-      TraceRayContext ctx {
-        .O = O,
-        .D = D,
-        .backgroundColor = Color(200, 200, 200),
-      };
-      Color color = TraceRay(sceneObjects, ctx);
-      canvas.SetPixelColor(x, y, color.r, color.g, color.b);
-    }
-  }
-  canvas.SaveToBitmap();
-
-  sceneObjects = {};
-  delete sphere1;
-  delete sphere2;
-  delete sphere3;
-  
-  // testCanvas();
   return 0;
 }

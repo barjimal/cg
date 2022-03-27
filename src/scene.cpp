@@ -21,8 +21,9 @@ void Scene::RenderScene()
         .O = O,
         .D = D,
         .backgroundColor = Color(200, 200, 200),
+        .recursion_depth = 3,
       };
-      Color color = TraceRay(sceneObjects, ctx);
+      Color color = TraceRay(sceneObjects, sceneLights, ctx, 3);
       canvas.SetPixelColor(x, y, color.r, color.g, color.b);
     }
   }

@@ -2,6 +2,7 @@
 #define SPHERE_HPP
 
 #include <vector>
+#include <cmath>
 
 #include "common.hpp"
 #include  "scene_object.hpp"
@@ -14,10 +15,21 @@ class Sphere: public SceneObject
 private:
   double _radius;
   point3_t _center;
+
 public:
-  Sphere(double radius, point3_t center, Color color) : _radius(radius), _center(center) {
+  Sphere(
+    double radius, 
+    point3_t center, 
+    Color color,
+    int specular = -1,
+    double reflective = 0.0)
+    : _radius(radius), _center(center) 
+  {
+    _reflective = reflective;
+    _specular = specular;
     _color = color;
   }
+
   std::vector<double> IntersectRay(point3_t O, point3_t D, double t_min, double t_max) {
     double r = _radius;
     point3_t CO = O;
@@ -39,6 +51,18 @@ public:
     result = {t1, t2};
     return result;
   }
+
+  point3_t getNormal(point3_t O, point3_t D, point3_t P)
+  {
+    point3_t N = P;
+    boost::geometry::subtract_point(N, _center);
+    double length_N = std::sqrt(boost::geometry::dot_product(N, N));
+    boost::geometry::divide_value(N, length_N);
+    
+    return N;
+  }
+
+  ~Sphere() {}
 };
 
 } // namespace cg
